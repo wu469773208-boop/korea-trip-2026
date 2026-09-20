@@ -1,0 +1,7 @@
+{
+  "name": "korea-trip-2026",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": { "deploy": "wrangler deploy", "check": "node check.mjs" },
+  "devDependencies": { "wrangler": "4.135.0" }
+}
