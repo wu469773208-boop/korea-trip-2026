@@ -32,7 +32,9 @@ assert.equal(new Set(ids).size,ids.length,'unique anchors');
 for(const m of html.matchAll(/href="#([^"]+)"/g))assert(ids.includes(m[1]),`broken anchor ${m[1]}`);
 assert(!/<(?:script|img|iframe)[^>]+src=["']https?:/i.test(html),'no remote runtime assets');
 assert(!/<link[^>]+rel="stylesheet"/i.test(html));
-assert(!/\bfetch\(|XMLHttpRequest|localStorage|sessionStorage|type="checkbox"/.test(html));
+assert(!/\bfetch\(|XMLHttpRequest|sessionStorage/.test(html),'no network-backed or session-only state');
+assert(html.includes("const TODO_STORAGE_KEY='korea-trip-2026-checklist-v1'"),'persistent checklist storage');
+assert(html.includes("box.type='checkbox'"),'interactive checklist controls');
 for(const sensitive of ['17503069257','ZHANG/XINXIN','WU/XIAOSHUANG','EJ*****68','EE*****98','7–9A','7–9B'])assert(!html.includes(sensitive),'no private ticket data');
 const routeLinks=[...html.matchAll(/href="(https:\/\/www.google.com\/maps\/dir\/\?[^\"]+)"/g)].map(m=>new URL(m[1].replaceAll('&amp;','&')));
 for(const u of routeLinks){
